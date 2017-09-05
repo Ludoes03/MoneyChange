@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 using Xamarin.Forms;
+using MoneyChange.Views;
 
 namespace MoneyChange
 {
@@ -13,7 +10,7 @@ namespace MoneyChange
         {
             InitializeComponent();
 
-            MainPage = new MoneyChange.MainPage();
+            MainPage = new MainView();
         }
 
         protected override void OnStart()
