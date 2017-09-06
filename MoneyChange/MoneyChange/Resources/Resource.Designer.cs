@@ -152,7 +152,7 @@ namespace MoneyChange.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Source Rate:.
+        ///   Busca una cadena traducida similar a Source Rate....
         /// </summary>
         public static string SourceRateTitle {
             get {

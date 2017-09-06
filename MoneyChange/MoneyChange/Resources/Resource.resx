@@ -148,7 +148,7 @@
     <value>Source Rate:</value>
   </data>
   <data name="SourceRateTitle" xml:space="preserve">
-    <value>Source Rate:</value>
+    <value>Source Rate...</value>
   </data>
   <data name="SourceRateValidation" xml:space="preserve">
     <value>You must select a source rate.</value>

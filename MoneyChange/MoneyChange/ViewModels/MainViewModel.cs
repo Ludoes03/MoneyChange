@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using MoneyChange.Helpers;
 using MoneyChange.Models;
 using Newtonsoft.Json;
 using System;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Windows.Input;
 using Xamarin.Forms;
+using MoneyChange.Views;
 
 namespace MoneyChange.ViewModels
 {
@@ -24,9 +26,29 @@ namespace MoneyChange.ViewModels
         Rate _sourceRate;
         Rate _targetRate;
         ObservableCollection<Rate> _rates;
+        string _status;
         #endregion
 
         #region Properties
+        public string Status
+        {
+            get
+            {
+                return _status;
+            }
+
+            set
+            {
+                if (_status != value)
+                {
+                    _status = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(Status)));
+                }
+            }
+        }
+
         public string Amount
         {
             get;
@@ -156,33 +178,7 @@ namespace MoneyChange.ViewModels
         async void LoadRates()
         {
             IsRunning = true;
-            Result = "Loading rates...";
-
-            try
-            {
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("https://apiexchangerates.azurewebsites.net");
-                var controller = "/api/Rates";
-                var response = await client.GetAsync(controller);
-                var result = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode)
-                {
-                    IsRunning = false;
-                    Result = result;
-                }
-                var rates = JsonConvert.DeserializeObject<List<Rate>>(result);
-                Rates = new ObservableCollection<Rate>(rates);
-
-                IsRunning = false;
-                IsEnabled = true;
-                Result = "Ready to convert...";
-
-            }
-            catch (Exception ex)
-            {
-                IsRunning = false;
-                Result = ex.Message;
-            }
+            Result = Lenguages.Loading;
         }
         #endregion
 
@@ -215,9 +211,9 @@ namespace MoneyChange.ViewModels
             if (string.IsNullOrEmpty(Amount))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter a value  in amount.",
-                    "Accept");
+                    Lenguages.Error,
+                    Lenguages.AmountValidation,
+                    Lenguages.Accept);
                 return;
             }
 
@@ -226,27 +222,27 @@ namespace MoneyChange.ViewModels
             if (!decimal.TryParse(Amount, out amount))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter a  numeric value  in amount.",
-                    "Accept");
+                    Lenguages.Error,
+                    Lenguages.AmountNumericValidation,
+                    Lenguages.Accept);
                 return;
             }
 
             if (SourceRate == null)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must select a source rate.",
-                    "Accept");
+                    Lenguages.Error,
+                    Lenguages.SourceRateValidation,
+                    Lenguages.Accept);
                 return;
             }
 
             if (TargetRate == null)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must select a target rate.",
-                    "Accept");
+                    Lenguages.Error,
+                    Lenguages.TargetRateValidation,
+                    Lenguages.Accept);
                 return;
             }
 
@@ -254,6 +250,10 @@ namespace MoneyChange.ViewModels
 
             Result = string.Format("{0} {1:C2} = {2} {3:C2}", SourceRate.Code, amount, TargetRate.Code, amountConverter);
         }
+        #endregion
+
+        #region Lenguages
+      
         #endregion
     }
 }

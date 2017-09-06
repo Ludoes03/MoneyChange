@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:i18n="clr-namespace:MoneyChange.Helpers"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              x:Class="MoneyChange.Views.MainView">
     <ContentPage.Content>
@@ -11,7 +12,7 @@
                 HorizontalOptions="Center"
                 Margin="10"
                 TextColor="Black"
-                Text="Foreign Exchange" >
+                Text="{i18n:Translate Title}" >
             </Label>
 
             <Grid>
@@ -29,7 +30,7 @@
                 <Label 
                     Grid.Column="0"
                     Grid.Row="0"
-                    Text="Amount:"
+                    Text="{i18n:Translate AmountLabel }" 
                     VerticalOptions="Center">
                 </Label>
 
@@ -38,7 +39,7 @@
                     Grid.ColumnSpan="2"
                     Grid.Row="0"
                     Text="{Binding Amount, Mode=TwoWay}"
-                    Placeholder="Enter the amount to convert...">
+                    Placeholder="{i18n:Translate AmountPlaceHolder}">
                 </Entry>
 
                 <Label 
@@ -54,13 +55,13 @@
                     ItemDisplayBinding="{Binding Name}"
                     ItemsSource="{Binding Rates}"
                     SelectedItem="{Binding SourceRate, Mode=TwoWay}"
-                    Title="Select a source rate">
+                    Title="{i18n:Translate SourceRateTitle}">
                 </Picker>
 
                 <Label 
                     Grid.Column="0"
                     Grid.Row="2"
-                    Text="Taget Rate:"
+                    Text="{i18n:Translate TargetRateLabel}"
                     VerticalOptions="Center">
                 </Label>
 
@@ -70,7 +71,7 @@
                     ItemDisplayBinding="{Binding Name}"
                     ItemsSource="{Binding Rates}"
                     SelectedItem="{Binding  TargetRate,Mode=TwoWay}"
-                    Title="Select a target rate">
+                    Title="{i18n:Translate TargetRateTitle}">
                 </Picker>
 
                 <Image 
@@ -97,7 +98,7 @@
                 IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                 Margin="10,0"
                 TextColor="White"
-                Text="Convert">
+                Text="{i18n:Translate Convert}">
             </Button>
             <Label
                 BackgroundColor="Silver"
@@ -107,6 +108,10 @@
                 VerticalTextAlignment="Center"
                 Text="{Binding Result, Mode=TwoWay}"
                 VerticalOptions="FillAndExpand">
+            </Label>
+            <Label
+                Text="{Binding Status, Mode=TwoWay}"
+                VerticalOptions="Center">
             </Label>
         </StackLayout>
     </ContentPage.Content>
