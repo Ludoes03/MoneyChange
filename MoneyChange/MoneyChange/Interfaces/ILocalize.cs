@@ -4,7 +4,7 @@ namespace MoneyChange.Interfaces
 {
     public interface ILocalize
     {
-        CultureInfo GetCurrentCultureInnfo();
+        CultureInfo GetCurrentCultureInfo();
         void SetLocale(CultureInfo ci);
     }
 }

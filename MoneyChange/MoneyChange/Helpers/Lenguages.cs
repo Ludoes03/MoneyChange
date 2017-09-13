@@ -1,5 +1,4 @@
-﻿using Xamarin;
-using MoneyChange.Interfaces;
+﻿using MoneyChange.Interfaces;
 using MoneyChange.Resources;
 using Xamarin.Forms;
 
@@ -9,7 +8,7 @@ namespace MoneyChange.Helpers
     {
         static Lenguages()
         {
-            var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInnfo();
+            var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
             Resource.Culture = ci;
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }

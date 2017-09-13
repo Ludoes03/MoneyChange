@@ -23,7 +23,7 @@ namespace MoneyChange.Droid.Implementations
 
     public class Localize : ILocalize
     {
-        public CultureInfo GetCurrentCultureInnfo()
+        public CultureInfo GetCurrentCultureInfo()
         {
             var netLanguage = "en";
             var androidLocale = Java.Util.Locale.Default;
@@ -83,8 +83,8 @@ namespace MoneyChange.Droid.Implementations
 
         string ToDotnetFallbackLanguage(PlatformCulture platCulture)
         {
-            var netLanguage = platCulture.LanguageCode; // use the first part of the identifier (two chars, usually);
-            switch (platCulture.LanguageCode)
+            var netLanguage = platCulture.LenguageCode; // use the first part of the identifier (two chars, usually);
+            switch (platCulture.LenguageCode)
             {
                 case "gsw":
                     netLanguage = "de-CH"; // equivalent to German (Switzerland) for this app

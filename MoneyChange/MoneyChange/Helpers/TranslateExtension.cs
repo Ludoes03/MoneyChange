@@ -1,5 +1,4 @@
 ﻿
-
 namespace MoneyChange.Helpers
 {
     using System;
@@ -23,7 +22,7 @@ namespace MoneyChange.Helpers
 
         public TranslateExtension()
         {
-            ci = DependencyService.Get<ILocalize>().GetCurrentCultureInnfo();
+            ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
         }
 
         public string Text { get; set; }

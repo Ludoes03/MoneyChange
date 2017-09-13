@@ -16,19 +16,19 @@ namespace MoneyChange.Helpers
             if(dashIndex > 0 )
             {
                 var parts = PlatformString.Split('-');
-                LanguageCode = parts[0];
+                LenguageCode = parts[0];
                 LocaleCode = parts[1];
             }
             else
             {
-                LanguageCode = PlatformString;
+                LenguageCode = PlatformString;
                 LocaleCode = "";
             }
 
         }
 
         public string PlatformString { get; private set; }
-        public string LanguageCode { get; private set; }
+        public string LenguageCode { get; private set; }
         public string LocaleCode { get; private set; }
 
         public override string ToString()

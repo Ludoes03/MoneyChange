@@ -1,15 +1,11 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using MoneyChange.Helpers;
 using MoneyChange.Models;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Net.Http;
 using System.Windows.Input;
 using Xamarin.Forms;
-using MoneyChange.Views;
 
 namespace MoneyChange.ViewModels
 {
@@ -17,6 +13,10 @@ namespace MoneyChange.ViewModels
     {
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Services
+        ApiService apiService;
         #endregion
 
         #region Attributes
@@ -170,6 +170,7 @@ namespace MoneyChange.ViewModels
         #region Contructor
         public MainViewModel()
         {
+            apiService = new ApiService();
             LoadRates();
         }
         #endregion
@@ -179,6 +180,21 @@ namespace MoneyChange.ViewModels
         {
             IsRunning = true;
             Result = Lenguages.Loading;
+
+            var response = await apiService.GetList<Rate>(
+                "https://apiexchangerates.azurewebsites.net",
+                "api/Rates");
+
+            if(!response.IsSucces)
+            {
+                IsRunning = false;
+                Result = response.Message;
+            }
+
+            Rates = new ObservableCollection<Rate>((List<Rate>)response.Result);
+            IsRunning = false;
+            IsEnabled = true;
+            Result = Lenguages.Ready;
         }
         #endregion
 
@@ -191,7 +207,7 @@ namespace MoneyChange.ViewModels
             }
         }
 
-        async void Switch()
+        void Switch()
         {
             var aux = SourceRate;
             SourceRate = TargetRate;
@@ -252,8 +268,6 @@ namespace MoneyChange.ViewModels
         }
         #endregion
 
-        #region Lenguages
-      
-        #endregion
+
     }
 }
