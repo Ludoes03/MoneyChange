@@ -107,6 +107,15 @@ namespace MoneyChange.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Check your internet connection.
+        /// </summary>
+        public static string CheckInternetConnection {
+            get {
+                return ResourceManager.GetString("CheckInternetConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Convert.
         /// </summary>
         public static string Convert {
@@ -143,6 +152,15 @@ namespace MoneyChange.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Check you internet setting.
+        /// </summary>
+        public static string SettingInternetConnection {
+            get {
+                return ResourceManager.GetString("SettingInternetConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Source Rate:.
         /// </summary>
         public static string SourceRateLabel {
@@ -166,6 +184,15 @@ namespace MoneyChange.Resources {
         public static string SourceRateValidation {
             get {
                 return ResourceManager.GetString("SourceRateValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rates loaded from internet..
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         

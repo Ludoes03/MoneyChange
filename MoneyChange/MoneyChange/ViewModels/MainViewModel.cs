@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using MoneyChange.Helpers;
 using MoneyChange.Models;
+using MoneyChange.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -17,6 +18,8 @@ namespace MoneyChange.ViewModels
 
         #region Services
         ApiService apiService;
+        DataService dataService;
+        DialogService dialogService;
         #endregion
 
         #region Attributes
@@ -171,6 +174,8 @@ namespace MoneyChange.ViewModels
         public MainViewModel()
         {
             apiService = new ApiService();
+            dataService = new DataService();
+            dialogService = new DialogService();
             LoadRates();
         }
         #endregion
@@ -181,6 +186,17 @@ namespace MoneyChange.ViewModels
             IsRunning = true;
             Result = Lenguages.Loading;
 
+            var connection = await apiService.CheckConnection();
+            if(!connection.IsSucces)
+            {
+                IsRunning = false;
+                Result = connection.Message;
+                return;
+            }
+
+            //URL del servicio
+            var url = Application.Current.Resources["URLAPI"].ToString();
+
             var response = await apiService.GetList<Rate>(
                 "https://apiexchangerates.azurewebsites.net",
                 "api/Rates");
@@ -190,11 +206,17 @@ namespace MoneyChange.ViewModels
                 IsRunning = false;
                 Result = response.Message;
             }
+            
+            //Storage data
+            var rates = (List<Rate>)response.Result;
+            dataService.DeleteAll<Rate>();
+            dataService.Save(rates);
 
-            Rates = new ObservableCollection<Rate>((List<Rate>)response.Result);
+            Rates = new ObservableCollection<Rate>(rates);
             IsRunning = false;
             IsEnabled = true;
             Result = Lenguages.Ready;
+            Status = Lenguages.Status;
         }
         #endregion
 
@@ -226,39 +248,38 @@ namespace MoneyChange.ViewModels
         {
             if (string.IsNullOrEmpty(Amount))
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     Lenguages.Error,
-                    Lenguages.AmountValidation,
-                    Lenguages.Accept);
+                    Lenguages.AmountValidation);
                 return;
+
+
+                    
             }
 
             decimal amount = 0;
 
             if (!decimal.TryParse(Amount, out amount))
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     Lenguages.Error,
-                    Lenguages.AmountNumericValidation,
-                    Lenguages.Accept);
+                    Lenguages.AmountNumericValidation);
                 return;
             }
 
             if (SourceRate == null)
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     Lenguages.Error,
-                    Lenguages.SourceRateValidation,
-                    Lenguages.Accept);
+                    Lenguages.SourceRateValidation);
                 return;
             }
 
             if (TargetRate == null)
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     Lenguages.Error,
-                    Lenguages.TargetRateValidation,
-                    Lenguages.Accept);
+                    Lenguages.TargetRateValidation);
                 return;
             }
 

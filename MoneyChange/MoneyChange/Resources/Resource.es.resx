@@ -132,37 +132,46 @@
   <data name="AmountValidation" xml:space="preserve">
     <value>Debes ingresar un valor en cantidad.</value>
   </data>
-  <data name="Convert" xml:space="preserve">
-    <value>Convertir</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="Loading" xml:space="preserve">
-    <value>Cargando tarifa...</value>
+  <data name="CheckInternetConnection" xml:space="preserve">
+    <value>Verifica tu conexión a internet</value>
   </data>
   <data name="Ready" xml:space="preserve">
     <value>Listo para convertir!</value>
   </data>
-  <data name="SourceRateLabel" xml:space="preserve">
-    <value>Moneda origen:</value>
+  <data name="Loading" xml:space="preserve">
+    <value>Cargando tarifa...</value>
   </data>
-  <data name="SourceRateTitle" xml:space="preserve">
-    <value>Moneda origen..</value>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
   </data>
-  <data name="SourceRateValidation" xml:space="preserve">
-    <value>Debe seleccionar una  moneda origen.</value>
+  <data name="Convert" xml:space="preserve">
+    <value>Convertir</value>
   </data>
-  <data name="TargetRateLabel" xml:space="preserve">
-    <value>Moneda destino:</value>
+  <data name="SettingInternetConnection" xml:space="preserve">
+    <value>Verifica tu configuración de internet</value>
   </data>
-  <data name="TargetRateTitle" xml:space="preserve">
-    <value>Moneda destino...</value>
+  <data name="Title" xml:space="preserve">
+    <value>Divisas</value>
   </data>
   <data name="TargetRateValidation" xml:space="preserve">
     <value>Debe seleccionar una moneda destino.</value>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value>Divisas</value>
+  <data name="TargetRateTitle" xml:space="preserve">
+    <value>Moneda destino...</value>
+  </data>
+  <data name="TargetRateLabel" xml:space="preserve">
+    <value>Moneda destino:</value>
+  </data>
+  <data name="SourceRateValidation" xml:space="preserve">
+    <value>Debe seleccionar una  moneda origen.</value>
+  </data>
+  <data name="SourceRateTitle" xml:space="preserve">
+    <value>Moneda origen..</value>
+  </data>
+  <data name="SourceRateLabel" xml:space="preserve">
+    <value>Moneda origen:</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Precios cargados desde internet.</value>
   </data>
 </root>

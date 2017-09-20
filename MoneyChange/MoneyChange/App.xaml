@@ -7,8 +7,13 @@
 
 		<!-- Application resource dictionary -->
         <ResourceDictionary>
+            
             <!--Locator-->
             <infra:InstanceLocator x:Key="Locator"/>
+
+            <!-- Parameters -->
+            <x:String x:Key="URLAPI">https://apiexchangerates.azurewebsites.net</x:String>
+
         </ResourceDictionary>
 	</Application.Resources>
 </Application>
